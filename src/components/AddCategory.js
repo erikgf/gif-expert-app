@@ -1,6 +1,7 @@
 import { useState } from "react"
+import { PropTypes } from "prop-types";
 
-export const AddCategory = ( { onAddCategory }) => {
+export const AddCategory = ( { onNewCategory }) => {
     const [inputValue, setInputValue] = useState('OnePunch');
 
     const onChangeHandler = ( { target }) =>{
@@ -10,16 +11,15 @@ export const AddCategory = ( { onAddCategory }) => {
     const onSubmitHandler = ( e )=>{
         e.preventDefault();
         const newInputValue = inputValue.trim();
-        console.log(newInputValue);
         if (newInputValue.length > 0){
-            onAddCategory(newInputValue);
+            onNewCategory(newInputValue);
             setInputValue('');
         }
         
     }
 
     return (
-        <form onSubmit = { onSubmitHandler }>                        
+        <form onSubmit = { onSubmitHandler } aria-label="form">                        
             <input 
                 type="text"
                 placeholder="Buscar gifs"
@@ -30,3 +30,7 @@ export const AddCategory = ( { onAddCategory }) => {
         
     )
 };
+
+AddCategory.propTypes = {
+    onNewCategory: PropTypes.func.isRequired
+}
